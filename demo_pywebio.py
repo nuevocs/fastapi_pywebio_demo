@@ -5,15 +5,15 @@ from pywebio.output import *
 
 app = FastAPI()
 
-def task_func():
+def pywebio():
     put_text("test")
 
-@app.get("/app")
+@app.get("/fastapi")
 def read_main():
    return {"message": "Hello World from main app"}
 
 # `task_func` is PyWebIO task function
-app.mount("/tool", FastAPI(routes=webio_routes(task_func)))
+app.mount("/pywebio", FastAPI(routes=webio_routes(pywebio)))
 
 if __name__ == "__main__":
-    uvicorn.run(app, host='127.0.0.1', port=8000)
+    uvicorn.run(app, host='0.0.0.0', port=3000)
